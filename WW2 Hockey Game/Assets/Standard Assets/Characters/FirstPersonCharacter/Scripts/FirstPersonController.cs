@@ -216,11 +216,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
             speed = m_IsWalking ? m_WalkSpeed : m_RunSpeed;
             m_Input = new Vector2(horizontal, vertical);
 
+			/*
             // normalize input if it exceeds 1 in combined length:
             if (m_Input.sqrMagnitude > 1)
             {
                 m_Input.Normalize();
             }
+            */
 
             // handle speed change to give an fov kick
             // only if the player is going to a run, is running and the fovkick is to be used
