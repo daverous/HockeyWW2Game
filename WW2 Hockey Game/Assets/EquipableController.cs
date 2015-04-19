@@ -6,10 +6,14 @@ public class EquipableController : MonoBehaviour {
 
 	public Equipable[] equipables;
 	Equipable equipped;
+	Equipable equippedObject;
 
 	// Use this for initialization
 	void Start () {
 		equipped = equipables[0];
+		equippedObject = new Equipable();
+		equippedObject = Instantiate(equipped, transform.position, transform.rotation) as Equipable;
+		equippedObject.transform.parent = transform;
 	}
 	
 	// Update is called once per frame
@@ -21,8 +25,12 @@ public class EquipableController : MonoBehaviour {
 			{
 				if (equipables[i] != null)
 				{
+					Debug.Log(equippedObject.name);
+					Destroy (equippedObject.gameObject);
 			  		equipped = equipables[i];
-					Debug.Log(equipped.name);
+					equippedObject = new Equipable();
+					equippedObject = Instantiate(equipped, transform.position, transform.rotation) as Equipable;
+					equippedObject.transform.parent = transform;
 				}
 				else
 					Debug.Log("Slot " + i + " is empty!");
