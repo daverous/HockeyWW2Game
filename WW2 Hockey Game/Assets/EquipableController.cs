@@ -12,7 +12,7 @@ public class EquipableController : MonoBehaviour {
 	void Start () {
 		equipped = equipables[0];
 		equippedObject = new Equipable();
-		equippedObject = Instantiate(equipped, transform.position, transform.rotation) as Equipable;
+		equippedObject = Instantiate(equipped, transform.position, Quaternion.Euler(0, 0, 270)) as Equipable;
 		equippedObject.transform.parent = transform;
 	}
 	
@@ -29,7 +29,7 @@ public class EquipableController : MonoBehaviour {
 					Destroy (equippedObject.gameObject);
 			  		equipped = equipables[i];
 					equippedObject = new Equipable();
-					equippedObject = Instantiate(equipped, transform.position, transform.rotation) as Equipable;
+					equippedObject = Instantiate(equipped, transform.position, Quaternion.Euler(0, 0, 270)) as Equipable;
 					equippedObject.transform.parent = transform;
 				}
 				else
