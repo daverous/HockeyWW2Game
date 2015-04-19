@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class Weapon : Equipable
 {
-
-	//8 Direction shoot
+	
 	#region vars
-	public int damage = 0;
+	public Bullet bullet;
+	Bullet bulletObject;
 	#endregion
 	// Use this for initialization
 	void Start ()
@@ -17,6 +18,10 @@ public class Weapon : Equipable
 	// Update is called once per frame
 	void Update ()
 	{
-	
+		if (CrossPlatformInputManager.GetButtonDown("Fire1"))
+		{
+			bulletObject = Instantiate(bullet, transform.position, transform.rotation) as Bullet;
+			Destroy (bulletObject, 5f);
+		}
 	}
 }

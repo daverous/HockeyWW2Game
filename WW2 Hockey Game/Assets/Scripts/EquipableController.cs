@@ -25,7 +25,6 @@ public class EquipableController : MonoBehaviour {
 			{
 				if (equipables[i] != null)
 				{
-					Debug.Log(equippedObject.name);
 					Destroy (equippedObject.gameObject);
 			  		equipped = equipables[i];
 					equippedObject = new Equipable();
