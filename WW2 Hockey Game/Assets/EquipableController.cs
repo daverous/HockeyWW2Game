@@ -16,7 +16,17 @@ public class EquipableController : MonoBehaviour {
 	void Update () {
 		// If an equip button is pressed, set equipped to the appropriate equipable
 		for (int i=0;i<4;i++)
+		{
 			if (CrossPlatformInputManager.GetButtonDown("Equip" + i))
-			    equipped = equipables[i];
+			{
+				if (equipables[i] != null)
+				{
+			  		equipped = equipables[i];
+					Debug.Log(equipped.name);
+				}
+				else
+					Debug.Log("Slot " + i + " is empty!");
+			}
+		}
 	}
 }
