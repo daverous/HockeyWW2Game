@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour {
 
+	public int health;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -11,5 +13,15 @@ public class Enemy : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
+	}
+
+	void Die () {
+		Destroy (gameObject);
+	}
+
+	public void Damage (int damage) {
+		health -= damage;
+		if (health <= 0)
+			Die ();
 	}
 }

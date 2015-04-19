@@ -20,6 +20,7 @@ public class Weapon : Equipable
 	{
 		if (CrossPlatformInputManager.GetButtonDown("Fire1"))
 		{
+			bulletObject = new Bullet ();
 			bulletObject = Instantiate(bullet, transform.position, transform.rotation) as Bullet;
 			Destroy (bulletObject, 5f);
 		}
