@@ -30,11 +30,21 @@ public class Character : MonoBehaviour
 
 	public void equip (int pos)
 	{
-		curEquiped = pos - 1;
+		if (pos < equiped.Length)
+			curEquiped = pos - 1;
 	}
 
 	public void pickupEquipable (Equipable eq)
 	{
 		equiped [curEquiped] = eq;
+	}
+
+	public void increaseHealth (int incr)
+	{
+		if (incr + curHealth > 100) {
+			curHealth = 100;
+		} else {
+			curHealth += incr;
+		}
 	}
 }
