@@ -16,7 +16,6 @@ public class Character : MonoBehaviour
 	void Start ()
 	{
 		curHealth = maxHealth;
-		curEquiped = 0;
 	}
 
 
@@ -40,8 +39,9 @@ public class Character : MonoBehaviour
 	{
 		Equipable equipObj = other.gameObject.GetComponent<Equipable> ();
 
+		// check if its an equipable obj
 		if (equipObj != null && equipObj.isPickupable ()) {
-			GetComponent<EquipableController> ().Equip (equipObj);
+			GetComponent<EquipableController> ().Equip (other.gameObject);
 
 		}
 	}

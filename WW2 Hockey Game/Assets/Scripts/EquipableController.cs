@@ -39,21 +39,21 @@ public class EquipableController : MonoBehaviour
 		}
 	}
 
-	public void Equip (Equipable obj)
+	public void Equip (GameObject obj)
 	{
 		for (int i=0; i<4; i++) {
 			if (equipables [i] == null) {
-				obj.setPickupable (false);
+				obj.GetComponent<Equipable> ().setPickupable (false);
 				equipables [i] = obj.gameObject;
 				equipped = i;
 				return;
 			}
 		}
-		Vector3 tempPos = obj.gameObject.transform.position;
-		Equipable temp = equipables [equipped];
+		Vector3 tempPos = obj.transform.position;
+		GameObject temp = equipables [equipped];
 		equipables [equipped] = obj;
 		equipables [equipped].transform.parent = temp.transform;
 		temp.transform.position = tempPos;
-		temp.setPickupable (true);
+		temp.GetComponent<Equipable> ().setPickupable (true);
 	}
 }
