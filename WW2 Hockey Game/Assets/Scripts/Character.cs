@@ -31,7 +31,7 @@ public class Character : MonoBehaviour
 	public void equip (int pos)
 	{
 		if (pos < equiped.Length)
-			curEquiped = pos - 1;
+			curEquiped = pos;
 	}
 
 	public void pickupEquipable (Equipable eq)
