@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Bullet : MonoBehaviour {
@@ -20,7 +20,7 @@ public class Bullet : MonoBehaviour {
 	{
 		if (collision.gameObject.GetComponent<Enemy>())
 		{
-			collision.gameObject.GetComponent<Enemy>().Damage(damage);
+			collision.gameObject.GetComponent<Enemy>().DoDamage(damage);
 			Destroy (gameObject);
 		}
 	}
