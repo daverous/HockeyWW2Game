@@ -18,11 +18,10 @@ public class Weapon : Equipable
 	// Update is called once per frame
 	void Update ()
 	{
-		if (CrossPlatformInputManager.GetButtonDown("Fire1"))
-		{
-			bulletObject = new Bullet ();
-			bulletObject = Instantiate(bullet, transform.position, transform.rotation) as Bullet;
-			Destroy (bulletObject, 5f);
+		if (CrossPlatformInputManager.GetButtonDown ("Fire1") && isEquiped ()) {
+//			bu	lletObject = new Bullet ();
+			bulletObject = Instantiate (bullet, transform.position, transform.rotation) as Bullet;
+			Destroy (bulletObject.gameObject, 5f);
 		}
 	}
 }

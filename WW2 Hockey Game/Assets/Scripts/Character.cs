@@ -6,10 +6,9 @@ public class Character : MonoBehaviour
 
 
 	#region fields
-	public int maxHealth = 100; 
+	public int maxHealth = 100;
+	public int meleeDamage = 10;
 	private int curHealth;
-	public Equipable[] equiped; 
-	private int curEquiped; //default to 0
 	private bool isInvincible;
 	#endregion
 
@@ -28,23 +27,22 @@ public class Character : MonoBehaviour
 		//TODO use curEquiped to update currently equiped weapon
 	}
 
-	public void equip (int pos)
-	{
-		if (pos < equiped.Length)
-			curEquiped = pos;
-	}
-
-	public void pickupEquipable (Equipable eq)
-	{
-		equiped [curEquiped] = eq;
-	}
-
 	public void increaseHealth (int incr)
 	{
 		if (incr + curHealth > 100) {
 			curHealth = 100;
 		} else {
 			curHealth += incr;
+		}
+	}
+
+	void OnCollisonEnter (Collision other)
+	{
+		Equipable equipObj = other.gameObject.GetComponent<Equipable> ();
+
+		if (equipObj != null && equipObj.isPickupable ()) {
+			GetComponent<EquipableController> ().Equip (equipObj);
+
 		}
 	}
 }

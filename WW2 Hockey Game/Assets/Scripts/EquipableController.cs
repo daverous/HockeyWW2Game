@@ -2,20 +2,24 @@
 using System.Collections;
 using UnityStandardAssets.CrossPlatformInput;
 
+
+public enum EquipableTypes
+{
+	Weapon,
+	Health,
+	Tool
+}
 public class EquipableController : MonoBehaviour
 {
 
-	public Equipable[] equipables;
-	Equipable equipped;
-	Equipable equippedObject;
+	public GameObject[] equipables;
+	int equipped;
 
 	// Use this for initialization
 	void Start ()
 	{
-		equipped = equipables [0];
-		equippedObject = new Equipable ();
-		equippedObject = Instantiate (equipped, transform.position, Quaternion.Euler (0, 0, 270)) as Equipable;
-		equippedObject.transform.parent = transform;
+		equipped = 0;
+		equipables [equipped].transform.position = transform.position;
 	}
 	
 	// Update is called once per frame
@@ -25,15 +29,31 @@ public class EquipableController : MonoBehaviour
 		for (int i=0; i<4; i++) {
 			if (CrossPlatformInputManager.GetButtonDown ("Equip" + i)) {
 				if (equipables [i] != null) {
-					Destroy (equippedObject.gameObject);
-					equipped = equipables [i];
-					// feel like we want a game object here, unless we store model in Equipable too
-					equippedObject = new Equipable ();
-					equippedObject = Instantiate (equipped, transform.position, Quaternion.Euler (0, 0, 270)) as Equipable;
-					equippedObject.transform.parent = transform;
+					equipables [equipped].SetActive (false);
+					equipped = i;
+					equipables [equipped].SetActive (true);
+//					equipables [equipped].transform = transform;
 				} else
 					Debug.Log ("Slot " + i + " is empty!");
 			}
 		}
+	}
+
+	public void Equip (Equipable obj)
+	{
+		for (int i=0; i<4; i++) {
+			if (equipables [i] == null) {
+				obj.setPickupable (false);
+				equipables [i] = obj.gameObject;
+				equipped = i;
+				return;
+			}
+		}
+		Vector3 tempPos = obj.gameObject.transform.position;
+		Equipable temp = equipables [equipped];
+		equipables [equipped] = obj;
+		equipables [equipped].transform.parent = temp.transform;
+		temp.transform.position = tempPos;
+		temp.setPickupable (true);
 	}
 }
