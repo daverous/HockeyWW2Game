@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class Character : MonoBehaviour
 {
@@ -9,12 +10,16 @@ public class Character : MonoBehaviour
 	public int maxHealth = 100;
 	public int meleeDamage = 10;
 	private int curHealth;
+	private GameObject inRange;
 	private bool isInvincible;
+	private bool perform; // true if Action is being pressed by player
 	#endregion
 
 	// Use this for initialization
 	void Start ()
 	{
+		perform = false;
+		inRange = null;
 		curHealth = maxHealth;
 	}
 
@@ -23,6 +28,14 @@ public class Character : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+		if (CrossPlatformInputManager.GetButtonDown ("Action") && inRange != null) {
+			Debug.Log ("here");
+			perform = true;
+			GetComponentInChildren<EquipableController> ().Equip (inRange);
+		}
+		if (CrossPlatformInputManager.GetButtonUp ("Action")) {
+			perform = false;
+		}
 		//TODO use curEquiped to update currently equiped weapon
 	}
 
@@ -35,14 +48,21 @@ public class Character : MonoBehaviour
 		}
 	}
 
-	void OnCollisonEnter (Collision other)
+	void OnCollisionEnter (Collision other)
 	{
+		Debug.Log (other.gameObject.name);
 		Equipable equipObj = other.gameObject.GetComponent<Equipable> ();
 
 		// check if its an equipable obj
 		if (equipObj != null && equipObj.isPickupable ()) {
-			GetComponent<EquipableController> ().Equip (other.gameObject);
+			inRange = other.gameObject;
+		}
+	}
 
+	void OnCollisionExit (Collision other)
+	{
+		if (other.gameObject == inRange) {
+			inRange = null;
 		}
 	}
 }

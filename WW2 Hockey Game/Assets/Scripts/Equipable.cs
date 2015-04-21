@@ -5,7 +5,7 @@ public class Equipable : MonoBehaviour
 {
 
 	#region
-	private bool canPick;
+	public bool canPick;
 	private bool equiped; 
 	#endregion
 	// Use this for initialization
