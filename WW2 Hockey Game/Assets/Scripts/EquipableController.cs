@@ -37,23 +37,27 @@ public class EquipableController : MonoBehaviour
 	{
 		// If an equip button is pressed, set equipped to the appropriate equipable
 		for (int i=0; i<4; i++) {
-			if (CrossPlatformInputManager.GetButtonDown ("Equip" + i)) {
-				Debug.Log ("bitchin equip brah");
-				if (equipables [i] != null) {
-					equipables [equipped].SetActive (false);
-					equipped = i;
-					equipables [equipped].SetActive (true);
-					equipables [equipped].GetComponent<Equipable> ().setEquiped (true);
-//					equipables [equipped].transform.position = transform.position;
-				} else
-					Debug.Log ("Slot " + i + " is empty!");
+			if (CrossPlatformInputManager.GetButtonDown ("Equip" + i))
+				Switch (i);
 			}
-		}
 	}
 
-	public void Equip (GameObject obj)
+	void Switch (int i)
 	{
-		Debug.Log ("in equip");
+		Debug.Log ("Equipped Slot " + i);
+		if (equipables [i] != null) {
+			equipables [equipped].SetActive (false);
+			equipped = i;
+			equipables [equipped].SetActive (true);
+			equipables [equipped].GetComponent<Equipable> ().setEquiped (true);
+		} else
+			Debug.Log ("Slot " + i + " is empty!");
+	}
+
+	public void Pickup (GameObject obj)
+	{
+		Debug.Log ("Picked up " + obj.name);
+		// If there is room, add pickup to equipables
 		for (int i=0; i<4; i++) {
 			if (equipables [i] == null) {
 				equipables [equipped].SetActive (false);
@@ -67,6 +71,7 @@ public class EquipableController : MonoBehaviour
 				return;
 			}
 		}
+		// Otherwise, drop current item to make room for pickup
 		Vector3 tempPos = obj.transform.position;
 		GameObject temp = equipables [equipped];
 		temp.SetActive (false);

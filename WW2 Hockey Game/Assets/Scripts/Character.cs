@@ -31,7 +31,7 @@ public class Character : MonoBehaviour
 		if (CrossPlatformInputManager.GetButtonDown ("Action") && inRange != null) {
 			Debug.Log ("here");
 			perform = true;
-			GetComponentInChildren<EquipableController> ().Equip (inRange);
+			GetComponentInChildren<EquipableController> ().Pickup (inRange);
 		}
 		if (CrossPlatformInputManager.GetButtonUp ("Action")) {
 			perform = false;
@@ -50,7 +50,7 @@ public class Character : MonoBehaviour
 
 	void OnCollisionEnter (Collision other)
 	{
-		Debug.Log (other.gameObject.name);
+//		Debug.Log (other.gameObject.name);
 		Equipable equipObj = other.gameObject.GetComponent<Equipable> ();
 
 		// check if its an equipable obj
