@@ -22,7 +22,11 @@ public class Equipable : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		
+		if (transform.parent.name == "Equipped")
+		{
+			transform.position = transform.parent.position;
+			transform.eulerAngles = new Vector3 (0, 0, 270);
+		}
 	}
 
 	public void setPickupable (bool val)

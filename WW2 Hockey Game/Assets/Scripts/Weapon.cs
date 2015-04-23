@@ -19,8 +19,7 @@ public class Weapon : Equipable
 	void Update ()
 	{
 		if (CrossPlatformInputManager.GetButtonDown ("Fire1") && isEquiped ()) {
-//			bu	lletObject = new Bullet ();
-			bulletObject = Instantiate (bullet, transform.position, transform.rotation) as Bullet;
+			bulletObject = Instantiate (bullet, new Vector3(transform.position.x+1.5f, transform.position.y), transform.rotation) as Bullet;
 			Destroy (bulletObject.gameObject, 5f);
 		}
 	}

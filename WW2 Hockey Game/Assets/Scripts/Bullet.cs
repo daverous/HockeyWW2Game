@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Physics.IgnoreCollision(GetComponent<Collider>(), GetComponentInParent<Collider>());
 		GetComponent<Rigidbody>().velocity = transform.up * velocity;
 	}
 	

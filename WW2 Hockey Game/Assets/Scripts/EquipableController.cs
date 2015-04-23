@@ -56,7 +56,7 @@ public class EquipableController : MonoBehaviour
 
 	public void Pickup (GameObject obj)
 	{
-		Debug.Log ("Picked up " + obj.name);
+		obj.transform.position = transform.position;
 		// If there is room, add pickup to equipables
 		for (int i=0; i<4; i++) {
 			if (equipables [i] == null) {
@@ -68,6 +68,7 @@ public class EquipableController : MonoBehaviour
 				equipped = i;
 				equipables [i].transform.rotation = Quaternion.Euler (0, 0, 270);
 				equipables [i].transform.parent = transform;
+				Debug.Log ("Picked up " + obj.name + " in Slot " + i);
 				return;
 			}
 		}
