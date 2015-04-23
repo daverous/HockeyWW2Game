@@ -75,7 +75,7 @@ public class EquipableController : MonoBehaviour
 		// Otherwise, drop current item to make room for pickup
 		Vector3 tempPos = obj.transform.position;
 		GameObject temp = equipables [equipped];
-		temp.SetActive (false);
+		//temp.SetActive (false);
 		temp.GetComponent<Equipable> ().setEquiped (false);
 		temp.GetComponent<Equipable> ().setPickupable (true);
 		equipables [equipped] = obj;

@@ -20,6 +20,8 @@ public class Enemy : MonoBehaviour
 
 	void Die ()
 	{
+		GetComponentInChildren<Weapon>().setPickupable(true);
+		transform.DetachChildren();
 		Destroy (gameObject);
 	}
 

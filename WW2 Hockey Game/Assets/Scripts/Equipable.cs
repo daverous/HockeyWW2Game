@@ -11,7 +11,6 @@ public class Equipable : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-//		if (transform.parent.tag == "
 		if (transform.parent == null) {
 			canPick = true;
 		} else {

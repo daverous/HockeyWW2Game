@@ -48,6 +48,27 @@ public class Character : MonoBehaviour
 		}
 	}
 
+	void OnTriggerEnter (Collider other)
+	{
+		//		Debug.Log (other.gameObject.name);
+		//Debug.Log (other.gameObject.name);
+		Equipable equipObj = other.gameObject.GetComponent<Equipable> ();
+		
+		// check if its an equipable obj
+		if (equipObj != null && equipObj.isPickupable ()) {
+			Debug.Log (other.gameObject.name);
+			inRange = other.gameObject;
+		}
+	}
+
+	void OnTriggerExit (Collider other)
+	{
+		if (other.gameObject == inRange) {
+			inRange = null;
+		}
+	}
+
+	/*
 	void OnCollisionEnter (Collision other)
 	{
 //		Debug.Log (other.gameObject.name);
@@ -65,4 +86,5 @@ public class Character : MonoBehaviour
 			inRange = null;
 		}
 	}
+	*/
 }
